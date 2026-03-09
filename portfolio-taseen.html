@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Md Taseen Siddiqui — Creative Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #C9A84C;
+    --gold-light: #E8C96A;
+    --gold-dim: #8a6f2e;
+    --black: #080808;
+    --dark: #0f0f0f;
+    --card: #141414;
+    --border: rgba(201,168,76,0.18);
+    --text: #e8e0d0;
+    --muted: #a09880;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--black);
+    color: var(--text);
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+    
+  }
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none; z-index: 0; opacity: 0.4;
+  }
+  nav {
+    position: fixed; top: 0; width: 100%; z-index: 100;
+    padding: 24px 60px;
+    display: flex; justify-content: space-between; align-items: center;
+    background: linear-gradient(to bottom, rgba(8,8,8,0.95), transparent);
+    backdrop-filter: blur(2px);
+  }
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px; font-weight: 600;
+    color: var(--gold);
+    letter-spacing: 2px;
+    text-decoration: none;
+  }
+  .nav-links { display: flex; gap: 40px; list-style: none; }
+  .nav-links a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 11px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    transition: color 0.3s;
+  }
+  .nav-links a:hover { color: var(--gold); }
+  .hero {
+    min-height: 100vh;
+    display: flex; align-items: center; justify-content: center;
+    position: relative;
+    overflow: hidden;
+    padding: 120px 60px 80px;
+  }
+  .hero-bg {
+    position: absolute; inset: 0;
+    background: 
+      radial-gradient(ellipse 60% 50% at 70% 40%, rgba(201,168,76,0.07) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 60% at 20% 80%, rgba(201,168,76,0.04) 0%, transparent 60%);
+  }
+  .hero-line {
+    position: absolute; left: 60px; top: 0; bottom: 0;
+    width: 1px;
+    background: linear-gradient(to bottom, transparent, var(--gold-dim), transparent);
+    opacity: 0.4;
+  }
+  .hero-content { max-width: 900px; position: relative; z-index: 1; }
+  .hero-tag {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-size: 10px; letter-spacing: 4px; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 32px;
+    opacity: 0; animation: fadeUp 0.8s 0.2s forwards;
+  }
+  .hero-tag::before { content: ''; width: 30px; height: 1px; background: var(--gold); }
+  .hero-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(60px, 10vw, 120px);
+    font-weight: 300;
+    line-height: 0.9;
+    letter-spacing: -2px;
+    color: #fff;
+    margin-bottom: 10px;
+    opacity: 0; animation: fadeUp 0.8s 0.4s forwards;
+  }
+  .hero-name span { color: var(--gold); font-style: italic; }
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(18px, 3vw, 32px);
+    font-weight: 300;
+    color: var(--muted);
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    margin-bottom: 40px;
+    opacity: 0; animation: fadeUp 0.8s 0.6s forwards;
+  }
+  .hero-desc {
+    font-size: 14px; line-height: 2;
+    color: #9a9080; max-width: 500px;
+    margin-bottom: 56px;
+    opacity: 0; animation: fadeUp 0.8s 0.8s forwards;
+  }
+  .hero-btns {
+    display: flex; gap: 20px; flex-wrap: wrap;
+    opacity: 0; animation: fadeUp 0.8s 1s forwards;
+  }
+  .btn-gold {
+    padding: 14px 40px;
+    background: var(--gold);
+    color: #000;
+    font-size: 11px; letter-spacing: 3px; text-transform: uppercase;
+    font-weight: 600; font-family: 'Montserrat', sans-serif;
+    border: none; 
+    text-decoration: none;
+    transition: all 0.3s;
+    display: inline-block;
+    clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+  }
+  .btn-gold:hover { background: var(--gold-light); transform: translateY(-2px); }
+  .btn-outline {
+    padding: 14px 40px;
+    background: transparent;
+    color: var(--gold);
+    font-size: 11px; letter-spacing: 3px; text-transform: uppercase;
+    font-weight: 500; font-family: 'Montserrat', sans-serif;
+    border: 1px solid var(--border);
+     text-decoration: none;
+    transition: all 0.3s; display: inline-block;
+  }
+  .btn-outline:hover { border-color: var(--gold); background: rgba(201,168,76,0.05); }
+  .hero-scroll {
+    position: absolute; bottom: 40px; left: 60px;
+    display: flex; align-items: center; gap: 12px;
+    font-size: 10px; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--muted);
+    opacity: 0; animation: fadeUp 0.8s 1.2s forwards;
+  }
+  .scroll-line {
+    width: 40px; height: 1px;
+    background: linear-gradient(to right, var(--gold), transparent);
+    animation: scrollLine 2s infinite;
+  }
+  .stats {
+    padding: 80px 60px;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 40px;
+    position: relative;
+  }
+  .stat { text-align: center; }
+  .stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 56px; font-weight: 300;
+    color: var(--gold); line-height: 1;
+    margin-bottom: 8px;
+  }
+  .stat-label {
+    font-size: 10px; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--muted);
+  }
+  .section { padding: 120px 60px; position: relative; }
+  .section-header {
+    display: flex; align-items: flex-end;
+    justify-content: space-between;
+    margin-bottom: 80px;
+  }
+  .section-label {
+    font-size: 10px; letter-spacing: 4px; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 16px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .section-label::before { content: ''; width: 24px; height: 1px; background: var(--gold); }
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(36px, 5vw, 64px);
+    font-weight: 300; color: #fff;
+    line-height: 1.1;
+  }
+  .section-title em { color: var(--gold); font-style: italic; }
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2px;
+  }
+  .service-card {
+    background: var(--card);
+    padding: 56px 48px;
+    position: relative; overflow: hidden;
+    transition: all 0.4s;
+    border: 1px solid transparent;
+  }
+  .service-card::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(135deg, rgba(201,168,76,0.06) 0%, transparent 60%);
+    opacity: 0; transition: opacity 0.4s;
+  }
+  .service-card:hover { border-color: var(--border); }
+  .service-card:hover::before { opacity: 1; }
+  .service-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 80px; font-weight: 300;
+    color: rgba(201,168,76,0.08);
+    position: absolute; top: 20px; right: 36px;
+    line-height: 1; transition: color 0.4s;
+  }
+  .service-card:hover .service-num { color: rgba(201,168,76,0.14); }
+  .service-icon {
+    width: 48px; height: 48px;
+    margin-bottom: 28px;
+    color: var(--gold);
+  }
+  .service-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px; font-weight: 600;
+    color: #fff; margin-bottom: 16px;
+  }
+  .service-desc {
+    font-size: 13px; line-height: 1.9;
+    color: var(--muted); max-width: 340px;
+  }
+  .service-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 28px; }
+  .tag {
+    padding: 5px 14px;
+    border: 1px solid var(--border);
+    font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--gold-dim);
+    transition: all 0.3s;
+  }
+  .service-card:hover .tag { border-color: rgba(201,168,76,0.3); color: var(--gold); }
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+  .gallery-item {
+    position: relative; overflow: hidden;
+    
+    background: var(--card);
+    aspect-ratio: 4/3;
+    border: 1px solid var(--border);
+    transition: transform 0.4s;
+  }
+  .gallery-item:nth-child(1) { grid-column: span 2; aspect-ratio: 16/7; }
+  .gallery-item:nth-child(5) { grid-column: span 2; aspect-ratio: 16/7; }
+  .gallery-item:hover { transform: scale(0.99); }
+  .gallery-inner {
+    width: 100%; height: 100%;
+    display: flex; align-items: center; justify-content: center;
+    flex-direction: column; gap: 12px;
+    transition: transform 0.6s;
+  }
+  .gallery-item:hover .gallery-inner { transform: scale(1.03); }
+  .gallery-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(8,8,8,0.9) 0%, transparent 50%);
+    opacity: 0; transition: opacity 0.4s;
+    display: flex; align-items: flex-end;
+    padding: 28px;
+  }
+  .gallery-item:hover .gallery-overlay { opacity: 1; }
+  .gallery-info h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px; color: #fff; margin-bottom: 4px;
+  }
+  .gallery-info p { font-size: 11px; letter-spacing: 2px; color: var(--gold); text-transform: uppercase; }
+  .mock-1 { background: linear-gradient(135deg, #1e2a4a 0%, #243560 50%, #1a4a80 100%); }
+  .mock-2 { background: linear-gradient(135deg, #2a1a0a 0%, #3d2010 50%, #4a2800 100%); }
+  .mock-3 { background: linear-gradient(135deg, #151530 0%, #252560 100%); }
+  .mock-4 { background: linear-gradient(135deg, #1a1a0a 0%, #2a2a10 50%, #1e1e08 100%); }
+  .mock-5 { background: linear-gradient(135deg, #2a0a2a 0%, #450040 50%, #1e001e 100%); }
+  .mock-6 { background: linear-gradient(135deg, #0a2a0a 0%, #103510 50%, #082008 100%); }
+  .mock-label {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px; color: rgba(255,255,255,0.8);
+    letter-spacing: 4px; text-transform: uppercase;
+  }
+  .mock-icon { font-size: 42px; opacity: 1; color: var(--gold); }
+  .mock-gold-line { width: 60px; height: 1px; background: linear-gradient(to right, transparent, var(--gold), transparent); }
+  .contact-section { padding: 120px 60px; background: var(--dark); position: relative; }
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: start;
+  }
+  .contact-info h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(36px, 5vw, 60px);
+    font-weight: 300; color: #fff; margin-bottom: 24px;
+    line-height: 1.1;
+  }
+  .contact-info h2 em { color: var(--gold); font-style: italic; }
+  .contact-info p { font-size: 14px; line-height: 2; color: var(--muted); margin-bottom: 48px; }
+  .contact-detail {
+    display: flex; align-items: flex-start;
+    gap: 16px; margin-bottom: 28px;
+    padding-bottom: 28px;
+    border-bottom: 1px solid var(--border);
+  }
+  .contact-detail:last-child { border-bottom: none; }
+  .cd-icon {
+    width: 36px; height: 36px;
+    border: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; color: var(--gold); font-size: 14px;
+  }
+  .cd-label { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); margin-bottom: 4px; }
+  .cd-value { font-size: 14px; color: var(--text); }
+  .contact-form { display: flex; flex-direction: column; gap: 20px; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .form-group { display: flex; flex-direction: column; gap: 8px; }
+  .form-group label { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); }
+  .form-group input,
+  .form-group textarea,
+  .form-group select {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 14px 18px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 13px;
+    outline: none;
+    transition: border-color 0.3s;
+    resize: vertical;
+  }
+  .form-group input:focus,
+  .form-group textarea:focus,
+  .form-group select:focus { border-color: var(--gold); }
+  .form-group select option { background: #141414; }
+  .form-group textarea { min-height: 120px; }
+  .form-submit {
+    padding: 16px 48px;
+    background: transparent;
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 11px; letter-spacing: 3px; text-transform: uppercase;
+     transition: all 0.3s;
+    align-self: flex-start;
+    position: relative; overflow: hidden;
+  }
+  .form-submit::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: var(--gold);
+    transform: translateX(-100%);
+    transition: transform 0.3s;
+  }
+  .form-submit:hover::before { transform: translateX(0); }
+  .form-submit:hover { color: #000; }
+  .form-submit span { position: relative; z-index: 1; }
+  footer {
+    padding: 40px 60px;
+    border-top: 1px solid var(--border);
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .footer-brand { font-family: 'Cormorant Garamond', serif; font-size: 18px; color: var(--gold); letter-spacing: 2px; }
+  .footer-copy { font-size: 11px; color: var(--muted); letter-spacing: 1px; }
+  .footer-socials { display: flex; gap: 20px; }
+  .footer-socials a {
+    width: 36px; height: 36px;
+    border: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--muted); font-size: 13px;
+    text-decoration: none;
+    transition: all 0.3s;
+  }
+  .footer-socials a:hover { border-color: var(--gold); color: var(--gold); }
+  .gold-divider { width: 100%; height: 1px; background: linear-gradient(to right, transparent, var(--gold-dim), transparent); opacity: 0.3; }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes scrollLine {
+    0%, 100% { opacity: 0.4; }
+    50% { opacity: 1; }
+  }
+  .reveal {
+    opacity: 1; transform: translateY(0);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  @media (max-width: 900px) {
+    nav { padding: 20px 24px; }
+    .nav-links { display: none; }
+    .hero, .section, .contact-section { padding: 100px 24px 60px; }
+    .stats { grid-template-columns: repeat(2, 1fr); padding: 60px 24px; }
+    .services-grid { grid-template-columns: 1fr; }
+    .gallery-grid { grid-template-columns: 1fr 1fr; }
+    .gallery-item:nth-child(1), .gallery-item:nth-child(5) { grid-column: span 2; }
+    .contact-grid { grid-template-columns: 1fr; gap: 48px; }
+    .form-row { grid-template-columns: 1fr; }
+    footer { flex-direction: column; gap: 20px; text-align: center; padding: 32px 24px; }
+    .hero-scroll, .hero-line { display: none; }
+  }
+</style>
+</head>
+<body>
+
+
+<nav>
+  <a href="#" class="nav-logo">MTS</a>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#work">Work</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<section class="hero" id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-line"></div>
+  <div class="hero-content">
+    <div class="hero-tag">Available for Hire</div>
+    <h1 class="hero-name">Md Taseen<br><span>Siddiqui</span></h1>
+    <p class="hero-title">Creative Designer & AI Specialist</p>
+    <p class="hero-desc">Crafting premium digital experiences through bold design, strategic social media presence, and cutting-edge AI solutions. Every pixel intentional. Every strategy purposeful.</p>
+    <div class="hero-btns">
+      <a href="#work" class="btn-gold">View My Work</a>
+      <a href="#contact" class="btn-outline">Get In Touch</a>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <div class="scroll-line"></div>
+    Scroll to Explore
+  </div>
+</section>
+
+<div class="stats reveal">
+  <div class="stat">
+    <div class="stat-num" data-target="50">50+</div>
+    <div class="stat-label">Projects Completed</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num" data-target="30">30+</div>
+    <div class="stat-label">Happy Clients</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num" data-target="4">4</div>
+    <div class="stat-label">Core Services</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num" data-target="3">3+</div>
+    <div class="stat-label">Years Experience</div>
+  </div>
+</div>
+
+<section class="section" id="services">
+  <div class="section-header reveal">
+    <div>
+      <div class="section-label">What I Do</div>
+      <h2 class="section-title">Premium <em>Services</em><br>I Offer</h2>
+    </div>
+  </div>
+  <div class="services-grid">
+    <div class="service-card reveal">
+      <div class="service-num">01</div>
+      <svg class="service-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
+        <rect x="6" y="6" width="36" height="36" rx="2"/>
+        <circle cx="18" cy="18" r="4"/>
+        <path d="M6 32l10-10 8 8 6-6 12 12"/>
+      </svg>
+      <div class="service-name">Graphic Designing</div>
+      <p class="service-desc">From brand identities to print materials — visually striking designs that communicate your brand's story with elegance and precision.</p>
+      <div class="service-tags">
+        <span class="tag">Logo Design</span>
+        <span class="tag">Branding</span>
+        <span class="tag">Print Media</span>
+        <span class="tag">Illustration</span>
+      </div>
+    </div>
+    <div class="service-card reveal">
+      <div class="service-num">02</div>
+      <svg class="service-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
+        <rect x="8" y="4" width="32" height="40" rx="3"/>
+        <rect x="14" y="12" width="20" height="14" rx="1"/>
+        <circle cx="24" cy="34" r="3"/>
+      </svg>
+      <div class="service-name">Social Media Design</div>
+      <p class="service-desc">Scroll-stopping posts, stories, and creatives built for engagement. Designs tailored for Instagram, Facebook, LinkedIn & more.</p>
+      <div class="service-tags">
+        <span class="tag">Instagram Posts</span>
+        <span class="tag">Reels Cover</span>
+        <span class="tag">Banners</span>
+        <span class="tag">Stories</span>
+      </div>
+    </div>
+    <div class="service-card reveal">
+      <div class="service-num">03</div>
+      <svg class="service-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
+        <circle cx="24" cy="24" r="16"/>
+        <path d="M12 20c4-4 8-4 12 0s8 4 12 0"/>
+        <path d="M12 28c4 4 8 4 12 0s8-4 12 0"/>
+        <line x1="24" y1="8" x2="24" y2="40"/>
+      </svg>
+      <div class="service-name">Social Media Management</div>
+      <p class="service-desc">Full-scale management of your social presence — content calendars, posting schedules, analytics & growth strategies.</p>
+      <div class="service-tags">
+        <span class="tag">Content Strategy</span>
+        <span class="tag">Scheduling</span>
+        <span class="tag">Analytics</span>
+        <span class="tag">Growth</span>
+      </div>
+    </div>
+    <div class="service-card reveal">
+      <div class="service-num">04</div>
+      <svg class="service-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
+        <path d="M24 6l4 8h8l-6 6 2 8-8-4-8 4 2-8-6-6h8z"/>
+        <circle cx="24" cy="36" r="6"/>
+        <path d="M20 36c0-2.2 1.8-4 4-4s4 1.8 4 4"/>
+      </svg>
+      <div class="service-name">AI Specialist</div>
+      <p class="service-desc">Leveraging cutting-edge AI tools to supercharge workflows — AI content creation, automation, prompt engineering & AI-powered design.</p>
+      <div class="service-tags">
+        <span class="tag">AI Content</span>
+        <span class="tag">Automation</span>
+        <span class="tag">Prompt Engineering</span>
+        <span class="tag">AI Art</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="gold-divider"></div>
+
+<section class="section" id="work">
+  <div class="section-header reveal">
+    <div>
+      <div class="section-label">Portfolio</div>
+      <h2 class="section-title">Selected <em>Work</em><br>&amp; Projects</h2>
+    </div>
+  </div>
+  <div class="gallery-grid">
+    <div class="gallery-item mock-1 reveal">
+      <div class="gallery-inner">
+        <div class="mock-icon">◈</div>
+        <div class="mock-gold-line"></div>
+        <div class="mock-label">Brand Identity</div>
+      </div>
+      <div class="gallery-overlay">
+        <div class="gallery-info">
+          <h3>Luxury Brand Identity</h3>
+          <p>Graphic Design</p>
+        </div>
+      </div>
+    </div>
+    <div class="gallery-item mock-2 reveal">
+      <div class="gallery-inner">
+        <div class="mock-icon">✦</div>
+        <div class="mock-gold-line"></div>
+        <div class="mock-label">Social Post</div>
+      </div>
+      <div class="gallery-overlay">
+        <div class="gallery-info">
+          <h3>Instagram Campaign</h3>
+          <p>Social Media Design</p>
+        </div>
+      </div>
+    </div>
+    <div class="gallery-item mock-3 reveal">
+      <div class="gallery-inner">
+        <div class="mock-icon">⬡</div>
+        <div class="mock-gold-line"></div>
+        <div class="mock-label">AI Art</div>
+      </div>
+      <div class="gallery-overlay">
+        <div class="gallery-info">
+          <h3>AI-Generated Visuals</h3>
+          <p>AI Specialist</p>
+        </div>
+      </div>
+    </div>
+    <div class="gallery-item mock-4 reveal">
+      <div class="gallery-inner">
+        <div class="mock-icon">◎</div>
+        <div class="mock-gold-line"></div>
+        <div class="mock-label">Content Strategy</div>
+      </div>
+      <div class="gallery-overlay">
+        <div class="gallery-info">
+          <h3>Content Strategy Plan</h3>
+          <p>Social Media Management</p>
+        </div>
+      </div>
+    </div>
+    <div class="gallery-item mock-5 reveal">
+      <div class="gallery-inner">
+        <div class="mock-icon">◆</div>
+        <div class="mock-gold-line"></div>
+        <div class="mock-label">Logo Design</div>
+      </div>
+      <div class="gallery-overlay">
+        <div class="gallery-info">
+          <h3>Minimalist Logo Suite</h3>
+          <p>Graphic Design</p>
+        </div>
+      </div>
+    </div>
+    <div class="gallery-item mock-6 reveal">
+      <div class="gallery-inner">
+        <div class="mock-icon">★</div>
+        <div class="mock-gold-line"></div>
+        <div class="mock-label">Social Growth</div>
+      </div>
+      <div class="gallery-overlay">
+        <div class="gallery-info">
+          <h3>Social Growth Campaign</h3>
+          <p>Social Media Management</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="contact-section" id="contact">
+  <div class="contact-grid">
+    <div class="contact-info reveal">
+      <div class="section-label">Let's Connect</div>
+      <h2>Start a <em>Project</em><br>Together</h2>
+      <p>Ready to elevate your brand? Let's discuss how I can bring your vision to life with premium design, strategic social presence, and AI-powered innovation.</p>
+      <div class="contact-detail">
+        <div class="cd-icon">✉</div>
+        <div>
+          <div class="cd-label">Email</div>
+          <div class="cd-value">mrsiddiqui00786@gmail.com</div>
+        </div>
+      </div>
+      <div class="contact-detail">
+        <div class="cd-icon">✆</div>
+        <div>
+          <div class="cd-label">Phone / WhatsApp</div>
+          <div class="cd-value">+91 99395 29207</div>
+        </div>
+      </div>
+      <div class="contact-detail">
+        <div class="cd-icon">◎</div>
+        <div>
+          <div class="cd-label">Available On</div>
+          <div class="cd-value">Instagram · LinkedIn · Behance</div>
+        </div>
+      </div>
+    </div>
+    <form class="contact-form reveal" onsubmit="handleSubmit(event)">
+      <div class="form-row">
+        <div class="form-group">
+          <label>Your Name</label>
+          <input type="text" placeholder="Full Name" required>
+        </div>
+        <div class="form-group">
+          <label>Email Address</label>
+          <input type="email" placeholder="your@email.com" required>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Service Required</label>
+        <select>
+          <option value="">Select a Service</option>
+          <option>Graphic Designing</option>
+          <option>Social Media Post Design</option>
+          <option>Social Media Management</option>
+          <option>AI Specialist Services</option>
+          <option>Full Package</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Project Details</label>
+        <textarea placeholder="Tell me about your project, goals, and timeline..."></textarea>
+      </div>
+      <button type="submit" class="form-submit"><span>Send Message &rarr;</span></button>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-brand">Md Taseen Siddiqui</div>
+  <div class="footer-copy">&#169; 2025 · All Rights Reserved</div>
+  <div class="footer-socials">
+    <a href="#" title="Instagram">In</a>
+    <a href="#" title="LinkedIn">Li</a>
+    <a href="#" title="Behance">Be</a>
+  </div>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js">
+</script><script>
+
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 80);
+      }
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => observer.observe(el));
+  function handleSubmit(e) {
+    e.preventDefault();
+    const btn = e.target.querySelector('.form-submit span');
+    btn.textContent = 'Message Sent \u2713';
+    btn.parentElement.style.borderColor = '#4CAF50';
+    btn.parentElement.style.color = '#4C
